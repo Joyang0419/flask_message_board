@@ -1,0 +1,13 @@
+version: '3'
+services:
+    api:
+        container_name: reddoor_api-container
+        build: ./Flask_message_board
+        restart: always
+        command: "python app.py run"
+        volumes:
+        - api_data:/docker_api
+        ports:
+        - "200:200"
+volumes:
+    api_data:

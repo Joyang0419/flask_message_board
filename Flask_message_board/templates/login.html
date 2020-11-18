@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+<title>Log in Page</title>
+{% block content %}
+<div class="container">
+    <h1>Log in</h1>
+    {{ wtf.quick_form(form, button_map={'submit':'success'})}}
+</div>
+{% endblock content %}

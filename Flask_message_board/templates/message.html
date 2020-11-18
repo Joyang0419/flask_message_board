@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',    filename='message.css') }}">
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"></div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar"><img src="/static/images/{{ owner.account }}.jpg" alt="Daniel Adams">
+                    </div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg">{{ owner.username}}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+                    <form action method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        {{ wtf.form_field(form.message) }}
+                        <div class='wrapper'>
+                        <button id="submit" class="btn btn-secondary" style="width:340px; background-color: green;" type="submit" value="Submit">Submit</button>
+                        </div>
+                    </form>
+                </nav>
+            </div>
+        </div>
+        <!-- Wishlist-->
+        <div class="col-lg-8 pb-5">
+            {% for message in pagination_items %}
+                <div class="cart-item d-md-flex justify-content-between"><span class="remove-item" onclick="javascript:location.href='/message/delete/{{message.id}}'" ><i class="fa fa-times"></i></span>
+                    <div class="px-3 my-3">
+                        <a class="cart-item-product">
+                            <div class="cart-item-product-thumb"><img src="/static/images/{{ message.senter }}.jpg" alt="Product"></div>
+                            <div class="cart-item-product-info">
+                                <h4 class="cart-item-product-title" id="{{ message.id }}" data-senter="{{ message.senter }}" data-owner="{{ message.owner }}" data-message="{{ message.message }}" onclick="javascript:location.href='/message/{{message.owner_relationship.id}}/update/{{message.id}}'">{{ message.message }}</h4>
+                                <div class="text-lg text-body font-weight-medium pb-1">{{ message.senter_relationship.username}}
+                                </div><span>{{ message.pub_date}}</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+                <div class="text-right">
+                    <ul class="pagination pagination-split mt-0 float-right">
+                        {{ pagination.links }}
+                        {{ pagination.info }}
+                    </ul>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+

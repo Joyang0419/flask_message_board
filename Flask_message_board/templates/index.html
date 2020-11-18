@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',    filename='index.css') }}">
+<title>{{ title }}</title>
+<div class="content">
+    <div class="container">
+        <!-- end row -->
+        <div class="row">
+            {% for user in pagination_users %}
+                <div class="col-lg-4">
+                    <div class="text-center card-box">
+                        <div class="member-card pt-2 pb-2">
+
+                            <div style="width:300px;height:300px">
+                                <img style="width: 200px; height: 200px; position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto;" width="300px" height="300px"  alt="{{ user.id }}" src="/static/images/{{ user.account }}.jpg" class="rounded-circle img-thumbnail">
+                            </div>
+
+                            <div>
+                                <h4>{{user.username}}</h4>
+                                <input type ="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" onclick="javascript:location.href='./message/{{user.id}}'" value="Message Now"></input>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="text-right">
+                    <ul class="pagination pagination-split mt-0 float-right">
+                        {{ pagination.links }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- container -->
+</div>
+
+{% endblock content %}
