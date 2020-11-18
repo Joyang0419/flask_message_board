@@ -11,3 +11,5 @@
 # 實際頁面:
 - 主頁面
 - ![image](https://github.com/Joyang0419/flask_message_board/blob/main/images/index.png)
+- 留言頁面:
+- ![image](https://github.com/Joyang0419/flask_message_board/blob/main/images/message.png)
